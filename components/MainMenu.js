@@ -1,7 +1,7 @@
 export default function MainMenu({ menu }) {
     function listItem(item) {
         console.dir(item.child_items)
-        return <li>Title: {item.title} | ID: {item.object_id}</li>
+        return <li key={item.object_id}>Title: {item.title} | ID: {item.object_id}</li>
     }
 
     return (

@@ -1,0 +1,16 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {
+    @apply bg-gray-100 !important;
+}
+
+/* Custom WordPress Shit */
+.wp-block-image {
+    @apply shadow-lg !important;
+}
+    
+.wp-block-image img{
+        @apply rounded shadow-2xl !important;
+}
