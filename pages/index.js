@@ -10,6 +10,7 @@ const Home = ({ entry, main_menu }) => (
     <h1>Title: {entry.title.rendered} | ID: {entry.id}</h1>
     <h2>ACF: {entry.acf.test}</h2>
     <MainMenu menu={main_menu} />
+    <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
   </div>
 )
 
