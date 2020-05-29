@@ -10,7 +10,7 @@ const subPage = ({ slug }) => {
     )
 }
 
-subPage.getInitialProps = async ({ query }) => {
+subPage.getStaticProps = async ({ query }) => {
 
     return {
         slug: query.subPage

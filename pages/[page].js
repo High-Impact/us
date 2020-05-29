@@ -24,7 +24,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => {
     )
 }
 
-TopLevel.getInitialProps = async ({ query} ) => {
+TopLevel.getStaticProps = async ({ query} ) => {
     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
     const global_options_json = await global_options.json()
 
