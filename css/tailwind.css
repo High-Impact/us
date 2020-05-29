@@ -3,14 +3,14 @@
 @import "tailwindcss/utilities";
 
 html {
-    @apply bg-gray-100 !important;
+    background-color: #f7fafc !important;
 }
 
 /* Custom WordPress Shit */
 .wp-block-image {
-    @apply shadow-lg !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
-    
-.wp-block-image img{
-        @apply rounded shadow-2xl !important;
+.wp-block-image img {
+    border-radius: 0.25rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
 }

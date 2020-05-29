@@ -2,24 +2,31 @@
 import Head from 'next/head'
 
 // Components
-import MainMenu from '../components/MainMenu'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Layout from '../components/Layout'
 
-const Home = ({ entry, main_menu }) => (
-  <div className="container mx-auto grid grid-cols-3 gap-4 bg-gray-100">
-    <div className="row-span-1 col-span-2">
-      <h1 className="text-4xl font-black">
-        Title: {entry.title.rendered} | ID: {entry.id}
-      </h1>
-      <h2 className="text-xl font-bold">
-        ACF: {entry.acf.test}
-      </h2>
-    </div>
-    <div className="row-span-1 col-span-1">
-      <MainMenu menu={main_menu} />
-    </div>
-    <div className="row-span-2 col-span-2 rounded bg-gray-400 p-4">
-      <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
-    </div>
+const Home = ({ entry }) => (
+  <div className="main">
+    <Header />
+
+    <Layout>
+      <div className="row-span-1 col-span-2">
+        <h1 className="text-4xl font-black">
+          Title: {entry.title.rendered} | ID: {entry.id}
+        </h1>
+        <h2 className="text-xl font-bold">
+          ACF: {entry.acf.test}
+        </h2>
+      </div>
+      <div className="row-span-1 col-span-1">
+      </div>
+      <div className="row-span-2 col-span-2 rounded bg-gray-400 p-4">
+        <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
+      </div>
+    </Layout>
+
+    <Footer />
   </div>
 )
 
