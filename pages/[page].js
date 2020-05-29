@@ -14,7 +14,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => {
             <Header menu={main_menu} global_options={global_options} />
 
             <Layout>
-                <div className="rounded bg-gray-400 p-4">
+                <div className="w-full">
                     <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
                 </div>
             </Layout>
@@ -24,7 +24,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => {
     )
 }
 
-TopLevel.getStaticProps = async ({ query} ) => {
+TopLevel.getInitialProps = async ({ query} ) => {
     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
     const global_options_json = await global_options.json()
 
