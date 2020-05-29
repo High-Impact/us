@@ -6,9 +6,9 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 
-const Home = ({ entry }) => (
+const Home = ({ entry, main_menu, global_options }) => (
   <div className="main">
-    <Header />
+    <Header menu={main_menu} global_options={global_options} />
 
     <Layout>
       <div className="row-span-1 col-span-2">
@@ -26,7 +26,7 @@ const Home = ({ entry }) => (
       </div>
     </Layout>
 
-    <Footer />
+    <Footer menu={main_menu} global_options={global_options}/>
   </div>
 )
 
@@ -45,7 +45,8 @@ Home.getInitialProps = async (ctx) => {
 
   return { 
       entry: entry_page_json,
-      main_menu: main_menu_json
+      main_menu: main_menu_json,
+      global_options: global_options_json
   }
 }
 

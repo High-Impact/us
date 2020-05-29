@@ -1,10 +1,7 @@
 export default function Layout({children}) {
     return (
-        <div className="container">
+        <div className="container m-auto p-4">
             {children}
-            <ul>
-                <li>Layout</li>
-            </ul>
         </div>
     )
 }
