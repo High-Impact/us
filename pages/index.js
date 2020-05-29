@@ -11,16 +11,6 @@ const Home = ({ entry, main_menu, global_options }) => (
     <Header menu={main_menu} global_options={global_options} />
 
     <Layout>
-      <div className="row-span-1 col-span-2">
-        <h1 className="text-4xl font-black">
-          Title: {entry.title.rendered} | ID: {entry.id}
-        </h1>
-        <h2 className="text-xl font-bold">
-          ACF: {entry.acf.test}
-        </h2>
-      </div>
-      <div className="row-span-1 col-span-1">
-      </div>
       <div className="row-span-2 col-span-2 rounded bg-gray-400 p-4">
         <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
       </div>
