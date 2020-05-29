@@ -22,7 +22,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => {
             <Footer menu={main_menu} global_options={global_options} />
         </div>
     )
-}
+} 
 
 TopLevel.getInitialProps = async ({ query} ) => {
     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
