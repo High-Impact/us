@@ -1,7 +1,7 @@
 // Components
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import Layout from '../../components/Layout'
+import Header from '../../../components/Header'
+import Footer from '../../../components/Footer'
+import Layout from '../../../components/Layout'
 
 
 const TopLevel = ({ entry, main_menu, global_options }) => {
