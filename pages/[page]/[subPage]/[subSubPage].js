@@ -1,7 +1,7 @@
 // Components
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Layout from '../components/Layout'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import Layout from '../../components/Layout'
 
 
 const TopLevel = ({ entry, main_menu, global_options }) => {
@@ -12,7 +12,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => {
 
             <Layout>
                 <div className="w-full">
-                    <h1 class="text-6xl font-bold mt-4 mb-2">{entry.title.rendered}</h1>
+                    <h1>{entry.title.rendered}</h1>
                     <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
                 </div>
             </Layout>
@@ -26,7 +26,7 @@ TopLevel.getInitialProps = async ({ query} ) => {
     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
     const global_options_json = await global_options.json()
 
-    const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages/?slug=${query.page}`)
+    const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages/?slug=${query.subSubPage}/`)
     const page_data_json = await page_data_call.json()
 
     const main_menu_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main`)

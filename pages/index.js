@@ -1,6 +1,3 @@
-// Next.JS
-import Head from 'next/head'
-
 // Components
 import Header from '../components/Header'
 import Footer from '../components/Footer'
