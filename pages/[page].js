@@ -38,7 +38,6 @@ export async function getStaticPaths() {
   }
 
   export async function getStaticProps({ params }) {
-    console.log('test')
     const global_options_call = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
     const global_options = await global_options_call.json()
   
