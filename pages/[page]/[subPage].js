@@ -1,44 +1,164 @@
 // Components
+// import Header from '../../components/Header'
+// import Footer from '../../components/Footer'
+// import Layout from '../../components/Layout'
+
+
+// const TopLevel = ({ entry, main_menu, global_options }) => {
+    
+//     return (
+//         <div className="main">
+//             <Header menu={main_menu} global_options={global_options} />
+
+//             <Layout>
+//                 <div className="w-full">
+//                     <h1>{entry.title.rendered}</h1>
+//                     <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
+//                 </div>
+//             </Layout>
+
+//             <Footer menu={main_menu} global_options={global_options} />
+//         </div>
+//     )
+// } 
+
+// TopLevel.getInitialProps = async ({ query} ) => {
+//     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
+//     const global_options_json = await global_options.json()
+
+//     const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages/?slug=${query.subPage}/`)
+//     const page_data_json = await page_data_call.json()
+
+//     const main_menu_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main`)
+//     const main_menu_json = await main_menu_call.json()
+
+
+//     return {
+//         entry: page_data_json[0],
+//         main_menu: main_menu_json,
+//         global_options: global_options_json
+//     }
+// }
+
+
+// export default TopLevel
+
+// ======================
+
+// Components
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Layout from '../../components/Layout'
 
-
-const TopLevel = ({ entry, main_menu, global_options }) => {
-    
-    return (
-        <div className="main">
-            <Header menu={main_menu} global_options={global_options} />
-
-            <Layout>
-                <div className="w-full">
-                    <h1>{entry.title.rendered}</h1>
-                    <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
-                </div>
-            </Layout>
-
-            <Footer menu={main_menu} global_options={global_options} />
+const SubPage = ({ entry, main_menu, global_options }) => (
+    <div className="main">
+      <Header menu={main_menu} global_options={global_options} />
+  
+      <Layout>
+        <div className="w-full">
+            {/* {console.log(entry)} */}
+            <h1 className="text-6xl font-bold mt-4 mb-2">{entry.title.rendered}</h1>
+            <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
         </div>
-    )
-} 
+      </Layout>
+  
+      <Footer menu={main_menu} global_options={global_options}/>
+    </div>
+  )
 
-TopLevel.getInitialProps = async ({ query} ) => {
-    const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
-    const global_options_json = await global_options.json()
+  // This function gets called at build time
+export async function getStaticPaths() {
+    // Call an external API endpoint to get posts
+    const parents_api_call = await fetch('https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main')
+    const parents_json = await parents_api_call.json()
 
-    const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages/?slug=${query.subPage}/`)
-    const page_data_json = await page_data_call.json()
+    var parentIDS = new Array()
+    var parentSlug = new Array()
+
+    var parents = new Array()
+
+    parents_json.items.forEach(element => {
+        parentIDS.push(element.object_id)
+        parentSlug.push(element.slug)
+        var parent = {
+            "id":element.object_id,
+            "slug":element.slug
+        }
+        parents.push(parent)
+    });
+
+    // console.log(parents)
+
+    const posts_api_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages?parent=${parentIDS}`)
+    const posts_api_json = await posts_api_call.json()
+    
+
+
+    
+    
+    function getParentSlug(id) {
+        var parentSlug = []
+        for (var i = 0; i < parents.length; i++){
+            // look for the entry with a matching `code` value
+            if (parents[i].id == id){
+                // we found it
+                // obj[i].name is the matched result
+                parentSlug.push(parents[i].slug)
+            }
+        }
+        
+        // console.log(parentSlug[0]);
+
+        return parentSlug[0];
+    }
+
+
+
+    // Get the paths we want to pre-render based on posts
+    const paths = posts_api_json.map((post) => ({
+        params: { 
+            page: getParentSlug(post.parent),
+            subPage: post.slug
+         },
+    }))
+  
+    // We'll pre-render only these paths at build time.
+    // { fallback: false } means other routes should 404.
+
+    // paths: [
+    //     { 
+    //         params: { 
+    //             page: 'photos',
+    //             subPage: 'curation'
+    //         } 
+    //     }
+    //   ],
+    return { 
+        paths,
+        fallback: false 
+    }
+  }
+
+  export async function getStaticProps({ params }) {
+    const global_options_call = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
+    const global_options = await global_options_call.json()
+
+  
+    const entry_page_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages?slug=${params.subPage}`)
+    const entry_page_json = await entry_page_call.json()
+    const entry = entry_page_json[0]
 
     const main_menu_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main`)
-    const main_menu_json = await main_menu_call.json()
-
-
+    const main_menu = await main_menu_call.json()
+    
+    
     return {
-        entry: page_data_json[0],
-        main_menu: main_menu_json,
-        global_options: global_options_json
+      props: {
+        entry,
+        main_menu,
+        global_options
+      },
     }
-}
-
-
-export default TopLevel
+  }
+  
+  export default SubPage

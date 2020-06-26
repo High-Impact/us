@@ -18,7 +18,6 @@ export default function Header({ menu, global_options}) {
                 <ul className="w-2/3 flex justify-end items-center">
                     {menu.items.map((item) =>
                         <li className="mr-6" key={item.ID}>
-                            {console.log(item.slug)}
                             <Link href={`/${item.slug}`}>
                                 <a className="text-blue-500 hover:text-blue-800">{item.title}</a>
                             </Link>
