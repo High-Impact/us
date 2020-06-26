@@ -26,7 +26,7 @@ TopLevel.getInitialProps = async ({ query} ) => {
     const global_options = await fetch('https://us.wp.jonknoll.dev/wp-json/acf/v3/options/acf-global-options')
     const global_options_json = await global_options.json()
 
-    const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/pages/?slug=${query.subSubPage}/`)
+    const page_data_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/wp/v2/posts/?slug=${query.subSubPage}/`)
     const page_data_json = await page_data_call.json()
 
     const main_menu_call = await fetch(`https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main`)

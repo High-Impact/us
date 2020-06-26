@@ -12,7 +12,7 @@ const TopLevel = ({ entry, main_menu, global_options }) => (
             <h1 className="text-6xl font-bold mt-4 mb-2">{entry.title.rendered}</h1>
             <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
         </div>
-      </Layout>
+      </Layout> 
   
       <Footer menu={main_menu} global_options={global_options}/>
     </div>
