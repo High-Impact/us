@@ -58,6 +58,7 @@ class RenderPosts extends React.Component {
             console.log(error);
         })
     }
+
     getPrevPage() {
         let currentComponent = this;
         axios.get(`https://us.wp.jonknoll.dev/wp-json/wp/v2/posts`, {
@@ -80,28 +81,44 @@ class RenderPosts extends React.Component {
 
     
     render() {
-        const pageTotals = this.state.totalPosts;
+        const pageTotals = Math.ceil(this.state.totalPosts / 9);
         const currentPage = this.state.page;
         let pagination;
 
-        if (pageTotals == 0) {
-            pagination  = <div>
-                <h1>Page {currentPage} of {Math.ceil(pageTotals / 9)}</h1>
-                <button>Previous</button>
-                <button>Next</button>
-            </div>
-        } else {
+        if (this.state.page == 1) {
             pagination  = 
             <div>
-                <h1>Page {currentPage} of {Math.ceil(pageTotals / 9)}</h1>
-                <button onClick={this.getPrevPage}>Previous</button>
-                <button onClick={this.getNextPage}>Next</button>
+                <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+                <div>
+                    <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed mr-4" onClick={this.getPrevPage}>Previous</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={this.getNextPage}>Next</button>
+                </div>
             </div>
+        } else if (this.state.page == pageTotals) {
+            pagination  = 
+            <div>
+                <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+                <div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4" onClick={this.getPrevPage}>Previous</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" onClick={this.getNextPage}>Next</button>
+                </div>
+            </div>
+        } else if (this.state.page != pageTotals) {
+            pagination  = 
+            <div>
+                <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+                <div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4" onClick={this.getPrevPage}>Previous</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={this.getNextPage}>Next</button>
+                </div>
+            </div>
+        } else {
+            pagination  = <div></div>
         }
 
         return (
             <div>
-                <div className="grid grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-8">
                     {this.state.posts.map((post) =>
                         <RenderSinglePost  key={post.id} post={post}/>
                     )}
