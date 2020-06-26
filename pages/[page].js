@@ -21,11 +21,14 @@ const TopLevel = ({ entry, main_menu, global_options }) => (
   // This function gets called at build time
 export async function getStaticPaths() {
     // Call an external API endpoint to get posts
-    const posts_api_call = await fetch('https://us.wp.jonknoll.dev/wp-json/menus/v1/menus/main')
+  const posts_api_call = await fetch('https://us.wp.jonknoll.dev/wp-json/wp/v2/pages')
     const posts_api_json = await posts_api_call.json()
   
     // Get the paths we want to pre-render based on posts
-    const paths = posts_api_json.items.map((post) => ({
+
+    console.log(posts_api_json)
+
+    const paths = posts_api_json.map((post) => ({
         params: { page: post.slug },
     }))
   
