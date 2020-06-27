@@ -1,6 +1,7 @@
 // Next.js
 import Link from 'next/link'
 import React from 'react';
+import Head from 'next/head'
 
 function Hamburger(props) {
     if (!props.open) {
@@ -75,28 +76,10 @@ class Header extends React.Component {
     render() {
         return (
             <header className="">
-            {/* <div className="flex container m-auto">
-                <div className="w-1/3">
-                    <Link href='../../'>
-                        <span className="w-20 h-20 overflow-hidden relative block rounded-full cursor-pointer shadow-2xl  border-4 border-solid border-gray-600 transition ease-in duration-200 transform hover:scale-95">
-                            <img  
-                                src={this.state.global_options.acf.logo}
-                                className="max-w-none min-h-full max-h-full -mx-4"
-                            />
-                        </span>
-                    </Link>
-                </div>
-                <ul className="w-2/3 flex justify-end items-center">
-                    {this.state.menu.items.map((item) =>
-                        <li className="mr-6" key={item.ID}>
-                            <Link href={`/${item.slug}`}>
-                                <a className="text-blue-500 hover:text-blue-800">{item.title}</a>
-                            </Link>
-                        </li>
-                    )}
-                </ul>
-
-            </div> */}
+                <Head>
+                    <title>Our Journey</title>
+                    <link rel="shortcut icon" href="https://storage.googleapis.com/stateless-us-wp/2020/06/2e9a212d-favi.png" />
+                </Head>
             <div onClick={this.handleClick}>
                 <Hamburger open={this.state.menu_open} />
                 <Menu open={this.state.menu_open} menu={this.state.menu} />
