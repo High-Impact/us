@@ -1,6 +1,5 @@
 // Components
 import Header from '../../components/Header'
-import Footer from '../../components/Footer'
 import Layout from '../../components/Layout'
 import RenderPosts from '../../components/RenderPosts'
 
@@ -17,7 +16,6 @@ const SubPage = ({ entry, cat_ID, main_menu, global_options }) => (
         </div>
       </Layout>
   
-      <Footer menu={main_menu} global_options={global_options}/>
     </div>
   )
 

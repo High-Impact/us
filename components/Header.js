@@ -1,48 +1,3 @@
-// // Next.js
-// import Link from 'next/link'
-
-// export default function Header({ menu, global_options}) {
-//     return (
-//         <header className="bg-gray-400 p-4">
-//             <div className="flex container m-auto">
-//                 <div className="w-1/3">
-//                     <Link href='../../'>
-//                         <span className="w-20 h-20 overflow-hidden relative block rounded-full cursor-pointer shadow-2xl  border-4 border-solid border-gray-600 transition ease-in duration-200 transform hover:scale-95">
-//                             <img  
-//                                 src={global_options.acf.logo}
-//                                 className="max-w-none min-h-full max-h-full -mx-4"
-//                             />
-//                         </span>
-//                     </Link>
-//                 </div>
-//                 <ul className="w-2/3 flex justify-end items-center">
-//                     {menu.items.map((item) =>
-//                         <li className="mr-6" key={item.ID}>
-//                             <Link href={`/${item.slug}`}>
-//                                 <a className="text-blue-500 hover:text-blue-800">{item.title}</a>
-//                             </Link>
-//                         </li>
-//                     )}
-//                 </ul>
-
-//             </div>
-//             <div>
-//                 <button class="hamburger hamburger--collapse" type="button">
-//                     <span class="hamburger-box">
-//                         <span class="hamburger-inner"></span>
-//                     </span>
-//                 </button>
-//                 <button class="hamburger hamburger--collapse is-active" type="button">
-//                     <span class="hamburger-box">
-//                         <span class="hamburger-inner"></span>
-//                     </span>
-//                 </button>
-//             </div>
-//         </header>
-//     )
-// }
-
-// =========================
 // Next.js
 import Link from 'next/link'
 import React from 'react';
@@ -59,7 +14,8 @@ function Hamburger(props) {
     }
 
     return (
-        <button class="hamburger hamburger--collapse is-active z-20 fixed bg-white top-0 right-0" type="button">
+        <button 
+            class="hamburger hamburger--collapse is-active z-20 fixed bg-white top-0 right-0" type="button">
             <span class="hamburger-box">
                 <span class="hamburger-inner"></span>
             </span>
@@ -76,13 +32,21 @@ function Menu(props) {
 
     return (
         <div className="fixed bg-white top-0 z-10 w-full h-full">
-           <ul className="">
+            <ul className="container m-auto p-4">
+                <h6 className="text-6xl font-bold mt-4 mb-2">Menu</h6>
                 {props.menu.items.map((item) =>
-                    <li className="mr-6" key={item.ID}>
-                        <Link href={`/${item.slug}`}>
-                            <a className="text-blue-500 hover:text-blue-800">{item.title}</a>
-                        </Link>
-                    </li>
+                    ( item.title == 'Home' ? 
+                        <li key="Home">
+                            <Link href="/">
+                                <a className="text-blue-500 hover:text-blue-800 text-4xl font-bold mt-4 mb-2">- {item.title}</a>
+                            </Link>
+                        </li> : 
+                        <li className="mr-6" key={item.ID}>
+                            <Link href={`/${item.slug}`}>
+                                <a className="text-blue-500 hover:text-blue-800 text-4xl font-bold mt-4 mb-2">- {item.title}</a>
+                            </Link>
+                        </li>
+                    )
                 )}
             </ul>
         </div>

@@ -1,6 +1,5 @@
 // Components
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 
 const Home = ({ entry, main_menu, global_options }) => (
@@ -9,11 +8,11 @@ const Home = ({ entry, main_menu, global_options }) => (
 
     <Layout>
       <div className="w-full">
+        <h1 className="text-6xl font-bold mt-4 mb-2">{entry.title.rendered}</h1>
         <div dangerouslySetInnerHTML={{ __html: `${entry.content.rendered}` }} />
       </div>
     </Layout>
 
-    <Footer menu={main_menu} global_options={global_options}/>
   </div>
 )
 export async function getStaticProps() {

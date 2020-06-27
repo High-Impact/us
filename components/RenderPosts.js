@@ -85,7 +85,7 @@ class RenderPosts extends React.Component {
         const currentPage = this.state.page;
         let pagination;
 
-        if (this.state.page == 1) {
+        if ((this.state.page == 1) && (this.state.page != pageTotals)) {
             pagination  = 
             <div>
                 <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
@@ -94,7 +94,7 @@ class RenderPosts extends React.Component {
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={this.getNextPage}>Next</button>
                 </div>
             </div>
-        } else if (this.state.page == pageTotals) {
+        } else if ((this.state.page == pageTotals) && (this.state.page != 1)) {
             pagination  = 
             <div>
                 <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
@@ -104,14 +104,23 @@ class RenderPosts extends React.Component {
                 </div>
             </div>
         } else if (this.state.page != pageTotals) {
-            pagination  = 
-            <div>
-                <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+            pagination =
                 <div>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4" onClick={this.getPrevPage}>Previous</button>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={this.getNextPage}>Next</button>
+                    <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+                    <div>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4" onClick={this.getPrevPage}>Previous</button>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={this.getNextPage}>Next</button>
+                    </div>
                 </div>
-            </div>
+        } else if ((this.state.page == pageTotals) && (this.state.page == 1)) {
+            pagination =
+                <div>
+                    <strong className="font-bold my-4 block">Page {currentPage} of {pageTotals}</strong>
+                    <div>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4 opacity-50 cursor-not-allowed" onClick={this.getPrevPage}>Previous</button>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" onClick={this.getNextPage}>Next</button>
+                    </div>
+                </div>
         } else {
             pagination  = <div></div>
         }

@@ -1,6 +1,5 @@
 // Components
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Layout from '../components/Layout'
 
 const TopLevel = ({ entry, main_menu, global_options }) => (
@@ -14,7 +13,6 @@ const TopLevel = ({ entry, main_menu, global_options }) => (
         </div>
       </Layout> 
   
-      <Footer menu={main_menu} global_options={global_options}/>
     </div>
   )
 
